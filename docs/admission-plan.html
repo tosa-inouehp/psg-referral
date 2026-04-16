@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>入院診療計画書兼入院同意書 | 井上病院</title>
+  <style>
+    body {
+      font-family: "MS Mincho", "游明朝", "Yu Mincho", "Hiragino Mincho Pro", serif;
+      font-size: 12px;
+      background: #d0d0d0;
+      margin: 0;
+      padding: 24px;
+      color: #000;
+    }
+
+    .print-btn {
+      display: block;
+      width: 210mm;
+      margin: 0 auto 12px;
+      padding: 13px;
+      background: #1a5276;
+      color: white;
+      font-size: 16px;
+      font-family: "Hiragino Sans", "Meiryo", sans-serif;
+      font-weight: bold;
+      text-align: center;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    .print-btn:hover { background: #154360; }
+
+    .print-note {
+      width: 210mm;
+      margin: 0 auto 20px;
+      font-family: "Hiragino Sans", "Meiryo", sans-serif;
+      font-size: 13px;
+      color: #444;
+      text-align: center;
+    }
+
+    .page {
+      background: #fff;
+      width: 210mm;
+      min-height: 297mm;
+      margin: 0 auto;
+      padding: 10mm 12mm 10mm;
+      box-shadow: 0 2px 14px rgba(0,0,0,.25);
+      box-sizing: border-box;
+    }
+
+    /* ===== タイトル ===== */
+    .doc-title {
+      text-align: center;
+      font-size: 15px;
+      font-weight: bold;
+      line-height: 1.6;
+      margin-bottom: 6px;
+      letter-spacing: .05em;
+    }
+
+    .hospital-name {
+      text-align: right;
+      font-size: 11px;
+      margin-bottom: 2px;
+    }
+
+    /* ===== 説明医師・看護師行 ===== */
+    .doc-meta {
+      display: flex;
+      justify-content: flex-end;
+      gap: 30px;
+      font-size: 11px;
+      margin-bottom: 4px;
+    }
+
+    .doc-meta .meta-item {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .underline-field {
+      border-bottom: 1px solid #000;
+      display: inline-block;
+      min-width: 120px;
+    }
+
+    /* ===== 病名・病棟行 ===== */
+    .disease-row {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      gap: 16px;
+      font-size: 11px;
+      margin-bottom: 5px;
+      border-bottom: 1px solid #000;
+      padding-bottom: 3px;
+    }
+
+    /* ===== メインテーブル ===== */
+    table.main-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 11px;
+      margin-bottom: 5px;
+    }
+
+    table.main-table th,
+    table.main-table td {
+      border: 1px solid #000;
+      vertical-align: top;
+      padding: 5px 6px;
+      line-height: 1.7;
+    }
+
+    table.main-table th {
+      background: #f0f0f0;
+      text-align: center;
+      font-weight: bold;
+      white-space: nowrap;
+      width: 40px;
+    }
+
+    /* 日程行 */
+    tr.date-row th,
+    tr.date-row td {
+      text-align: center;
+      font-weight: bold;
+      padding: 4px 6px;
+    }
+
+    tr.date-row td.gairaicol {
+      width: 22%;
+    }
+
+    tr.date-row td.nyuincol {
+      width: 39%;
+    }
+
+    tr.date-row td.taiincol {
+      width: 39%;
+    }
+
+    /* PSG説明列 */
+    td.psg-col {
+      width: 34%;
+      vertical-align: top;
+    }
+
+    td.psg-col .psg-title {
+      font-weight: bold;
+      margin-bottom: 4px;
+    }
+
+    td.psg-col .psg-body {
+      font-size: 10.5px;
+      line-height: 1.75;
+    }
+
+    /* 入院日・退院日エリア */
+    td.nyuin-col {
+      width: 33%;
+      vertical-align: top;
+    }
+
+    td.taiin-col {
+      width: 33%;
+      vertical-align: top;
+    }
+
+    /* 内側の項目テーブル */
+    table.inner-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 11px;
+    }
+
+    table.inner-table th,
+    table.inner-table td {
+      border: 1px solid #888;
+      padding: 4px 5px;
+      vertical-align: top;
+      line-height: 1.7;
+    }
+
+    table.inner-table th {
+      background: #e8e8e8;
+      text-align: center;
+      font-weight: bold;
+      white-space: nowrap;
+      width: 36px;
+    }
+
+    .item-mark {
+      margin-right: 2px;
+    }
+
+    /* 日付入力欄 */
+    .date-input {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 3px;
+      font-size: 12px;
+      padding: 3px 0;
+    }
+
+    .date-box {
+      border: 1px solid #aaa;
+      border-radius: 2px;
+      display: inline-block;
+      background: #fff;
+      height: 20px;
+    }
+
+    /* 同意欄 */
+    .consent-section {
+      font-size: 11px;
+      margin-top: 4px;
+    }
+
+    .consent-note {
+      font-size: 10.5px;
+      line-height: 1.7;
+      margin-bottom: 4px;
+    }
+
+    .consent-sign {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 5px;
+      font-size: 12px;
+    }
+
+    .consent-left {
+      font-size: 11.5px;
+    }
+
+    .consent-right {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .sign-box {
+      border: 1px solid #aaa;
+      border-radius: 2px;
+      display: inline-block;
+      background: #fff;
+      height: 22px;
+    }
+
+    .patient-sign {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 5px;
+      font-size: 12px;
+    }
+
+    .patient-sign-line {
+      border-bottom: 1px solid #000;
+      min-width: 200px;
+      display: inline-block;
+    }
+
+    /* 栄養管理 */
+    .nutrition-row {
+      text-align: right;
+      font-size: 11px;
+      border-top: 1px solid #000;
+      padding-top: 3px;
+      margin-top: 3px;
+    }
+
+    /* 印刷 */
+    @media print {
+      body { background: white; padding: 0; margin: 0; }
+      .print-btn, .print-note { display: none !important; }
+      .page {
+        box-shadow: none;
+        margin: 0;
+        padding: 8mm 10mm 8mm;
+        width: 100%;
+        min-height: unset;
+      }
+    }
+
+    @page { size: A4 portrait; margin: 0; }
+  </style>
+</head>
+<body>
+
+<button class="print-btn" onclick="window.print()">🖨️ 印刷する（1枚）</button>
+<p class="print-note">高知脳神経外科病院にてご説明のうえ、患者様にご署名いただき、入院当日にご持参ください。</p>
+
+<div class="page">
+
+  <div class="doc-title">
+    睡眠時無呼吸症候群検査<br>
+    （終夜睡眠ポリソムノグラフィー）<br>
+    入院診療計画書　兼　入院同意書
+  </div>
+
+  <div class="doc-meta">
+    <div class="meta-item">説明医師　：　<span class="underline-field" style="min-width:140px;"></span></div>
+    <div class="meta-item">看護師　：　<span class="underline-field" style="min-width:140px;"></span></div>
+  </div>
+
+  <div class="disease-row">
+    <span>病名　：　睡眠時無呼吸症候群</span>
+    <span>，</span>
+    <span>病棟　：　医療病棟（2F）</span>
+  </div>
+
+  <!-- メイン表 -->
+  <table class="main-table">
+
+    <!-- 日程ヘッダー行 -->
+    <tr class="date-row">
+      <td class="gairaicol">
+        外来にて<br>
+        <span style="font-size:10px; font-weight:normal;">（検査予約日）</span>
+      </td>
+      <td class="nyuincol">
+        入院日<br>
+        <div class="date-input">
+          <span class="date-box" style="width:40px;"></span>月
+          <span class="date-box" style="width:40px;"></span>日
+        </div>
+      </td>
+      <td class="taiincol">
+        退院日<br>
+        <div class="date-input">
+          <span class="date-box" style="width:40px;"></span>月
+          <span class="date-box" style="width:40px;"></span>日
+        </div>
+      </td>
+    </tr>
+
+    <!-- 本文行 -->
+    <tr>
+      <!-- PSG説明 -->
+      <td class="psg-col">
+        <div class="psg-title">※　終夜睡眠ポリソムノグラフィーについて</div>
+        <div class="psg-body">
+          この検査は、眠っている間の睡眠と呼吸状態などを調べるための検査です。就寝前に頭や顔、身体中にセンサー類を付けて終夜記録します。無呼吸はもちろん、眠りの深さや四肢の異常運動などを判断することができます。この検査は痛みを伴うものではありません。
+        </div>
+      </td>
+
+      <!-- 入院日 -->
+      <td class="nyuin-col">
+        <table class="inner-table">
+          <tr>
+            <td colspan="2">
+              ※　病院駐車場に停め、受付にお声掛けください。病棟までご案内いたします。
+            </td>
+          </tr>
+          <tr>
+            <th>食事</th>
+            <td>
+              〇　当日、夕食を希望された方はご用意いたします。<br>
+              〇　希望されない方は、入院までに済ませて下さい。<br>
+              〇　機器装着後も食事は可能です。飲みにくい場合はストローをご使用ください。
+            </td>
+          </tr>
+          <tr>
+            <th>安静度</th>
+            <td>
+              〇　器械の装着までは制限ありません。<br>
+              〇　装着後はトイレまで（自室内）での活動になります。
+            </td>
+          </tr>
+          <tr>
+            <th>排泄</th>
+            <td>〇　検査中は病室内のトイレまで移動可能です。</td>
+          </tr>
+          <tr>
+            <th>内服薬</th>
+            <td>〇　普段、処方薬を服用されている方は持参ください。通常通り内服していただきます。</td>
+          </tr>
+        </table>
+      </td>
+
+      <!-- 退院日 -->
+      <td class="taiin-col">
+        <table class="inner-table">
+          <tr>
+            <td>
+              ※　会計は後日となります。
+            </td>
+          </tr>
+          <tr>
+            <td>〇　朝食を希望された方はご用意いたします。</td>
+          </tr>
+          <tr>
+            <td>〇　器械を外した後は、制限ありません。</td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+
+    <!-- 説明行 -->
+    <tr>
+      <th style="vertical-align:middle; writing-mode:vertical-rl; text-orientation:mixed; width:20px;">説　明</th>
+      <td>
+        〇　身長・体重・腹囲を測定します<br>
+        〇　入院についての説明があります。<br>
+        〇　入院手続きをしていただきます。<br>
+        〇　入院時刻は原則<strong>15:30まで</strong>です（16:00よりPSG機器装着を開始します）。<br>
+        〇　食事を希望される場合は予めお伝えください。<br>
+        ※　入院当日はお昼寝をせずに来院して下さい。
+      </td>
+      <td>
+        〇　入浴の後は就寝できる準備をしておいてください。<br>
+        〇　検査中、何かあればナースコールでお知らせください。<br>
+        〇　入眠出来ない場合はお薬をお出ししますので、お申し出ください。
+      </td>
+      <td>
+        〇　起床後、朝6時以降に器械を外します。<br>
+        〇　次回、外来受診日の説明があります。
+      </td>
+    </tr>
+
+  </table>
+
+  <!-- 栄養管理 -->
+  <div class="nutrition-row">
+    特別な栄養管理の必要性　：　有　・　無
+  </div>
+
+  <!-- 注記・同意欄 -->
+  <div class="consent-section">
+    <div class="consent-note">
+      ＊入院に関して心配事がありましたらお申し出ください。　＊この表はおよその経過をお知らせしたものです。種々の都合により、予定通りではないこともありますので、予めご承知ください。　＊入院に際してこの用紙を必ずお持ちください。
+    </div>
+
+    <div class="consent-sign">
+      <div class="consent-left">〇　上記説明を受け、入院に同意しました。</div>
+      <div class="consent-right">
+        令和
+        <span class="sign-box" style="width:40px;"></span>年
+        <span class="sign-box" style="width:34px;"></span>月
+        <span class="sign-box" style="width:34px;"></span>日
+      </div>
+    </div>
+
+    <div class="patient-sign">
+      患者・家族氏名　：　<span class="patient-sign-line"></span>
+      <span style="font-size:11px; margin-left:16px;">医療法人広正会　井上病院</span>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>
