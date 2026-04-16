@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>入院申込書・緊急連絡先表 | 井上病院</title>
+  <style>
+    /* ---- 画面表示用 ---- */
+    body {
+      font-family: "MS Mincho", "游明朝", "Yu Mincho", "Hiragino Mincho Pro", serif;
+      font-size: 14px;
+      background: #e8e8e8;
+      margin: 0;
+      padding: 24px;
+      color: #000;
+    }
+
+    .page {
+      background: #fff;
+      width: 210mm;
+      min-height: 297mm;
+      margin: 0 auto 32px;
+      padding: 20mm 18mm 16mm;
+      box-shadow: 0 2px 12px rgba(0,0,0,.2);
+      box-sizing: border-box;
+      position: relative;
+    }
+
+    .print-btn {
+      display: block;
+      width: 210mm;
+      margin: 0 auto 16px;
+      padding: 12px;
+      background: #1a5276;
+      color: white;
+      font-size: 16px;
+      font-family: "Hiragino Sans", "Meiryo", sans-serif;
+      font-weight: bold;
+      text-align: center;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+    .print-btn:hover { background: #154360; }
+
+    .print-note {
+      width: 210mm;
+      margin: 0 auto 20px;
+      font-family: "Hiragino Sans", "Meiryo", sans-serif;
+      font-size: 13px;
+      color: #555;
+      text-align: center;
+    }
+
+    /* ---- 共通 ---- */
+    h1 {
+      text-align: center;
+      font-size: 22px;
+      font-weight: bold;
+      margin: 0 0 16px;
+      letter-spacing: .1em;
+    }
+
+    h2 {
+      text-align: center;
+      font-size: 20px;
+      font-weight: bold;
+      margin: 0 0 20px;
+      letter-spacing: .1em;
+    }
+
+    .hospital-header {
+      font-size: 13px;
+      line-height: 1.8;
+      margin-bottom: 14px;
+    }
+
+    .preamble {
+      font-size: 12.5px;
+      line-height: 1.9;
+      margin-bottom: 14px;
+      text-indent: 1em;
+    }
+
+    ol.pledge {
+      font-size: 12.5px;
+      line-height: 2;
+      padding-left: 1.8em;
+      margin: 0 0 18px;
+    }
+
+    /* ---- 入力テーブル ---- */
+    .section-label {
+      font-size: 13px;
+      font-weight: bold;
+      margin: 16px 0 4px;
+      border-bottom: 1px solid #000;
+      padding-bottom: 2px;
+    }
+
+    table.form-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+      margin-bottom: 4px;
+    }
+
+    table.form-table th,
+    table.form-table td {
+      border: 1px solid #000;
+      padding: 5px 8px;
+      vertical-align: middle;
+    }
+
+    table.form-table th {
+      background: #f5f5f5;
+      text-align: center;
+      white-space: nowrap;
+      width: 70px;
+      letter-spacing: .1em;
+    }
+
+    .field-line {
+      display: inline-block;
+      min-width: 120px;
+      border-bottom: 1px solid #555;
+      margin: 0 4px;
+    }
+
+    .date-field {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      flex-wrap: wrap;
+    }
+
+    .date-field span { white-space: nowrap; }
+
+    .inline-label {
+      font-size: 12px;
+      margin-left: 12px;
+      white-space: nowrap;
+    }
+
+    .hanko-cell {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .hanko-box {
+      width: 36px;
+      height: 36px;
+      border: 1px solid #000;
+      display: inline-block;
+      flex-shrink: 0;
+    }
+
+    .tel-field {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .tel-field .seg {
+      border-bottom: 1px solid #555;
+      min-width: 60px;
+      display: inline-block;
+    }
+
+    /* ---- 署名欄 ---- */
+    .guarantor-note {
+      font-size: 12px;
+      line-height: 1.8;
+      margin-top: 6px;
+    }
+
+    /* ---- 日付・署名 ---- */
+    .date-sign-row {
+      display: flex;
+      justify-content: flex-end;
+      align-items: baseline;
+      gap: 8px;
+      font-size: 13px;
+      margin-top: 10px;
+    }
+
+    /* ---- ページ2: 緊急連絡先 ---- */
+    .patient-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 16px;
+      font-size: 13px;
+    }
+
+    .patient-name-row {
+      display: flex;
+      align-items: baseline;
+      gap: 6px;
+      font-size: 14px;
+    }
+
+    .patient-name-field {
+      border-bottom: 1px solid #000;
+      min-width: 140px;
+      display: inline-block;
+    }
+
+    .hospital-info-right {
+      text-align: right;
+      font-size: 12.5px;
+      line-height: 2;
+    }
+
+    .privacy-note {
+      font-size: 12.5px;
+      line-height: 1.9;
+      margin-bottom: 16px;
+    }
+
+    table.emergency-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 13px;
+      margin-bottom: 20px;
+    }
+
+    table.emergency-table th,
+    table.emergency-table td {
+      border: 1px solid #000;
+      padding: 6px 8px;
+      vertical-align: middle;
+    }
+
+    table.emergency-table thead th {
+      background: #f0f0f0;
+      text-align: center;
+      font-weight: bold;
+    }
+
+    table.emergency-table .num-cell {
+      text-align: center;
+      width: 30px;
+      vertical-align: middle;
+    }
+
+    table.emergency-table .name-cell  { width: 110px; }
+    table.emergency-table .kzk-cell   { width: 50px; }
+    table.emergency-table .addr-cell  { min-width: 140px; }
+    table.emergency-table .tel-cell   { width: 140px; }
+
+    .tel-type {
+      font-size: 11px;
+      color: #333;
+      white-space: nowrap;
+    }
+
+    .kyuhen-section h3 {
+      text-align: center;
+      font-size: 15px;
+      font-weight: bold;
+      margin: 0 0 10px;
+    }
+
+    .kyuhen-section p {
+      font-size: 12.5px;
+      line-height: 1.9;
+      margin: 0 0 6px;
+    }
+
+    .kyuhen-sign {
+      margin-top: 14px;
+      font-size: 13px;
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+    }
+
+    .kyuhen-sign .field-underline {
+      border-bottom: 1px solid #000;
+      min-width: 160px;
+      display: inline-block;
+    }
+
+    .paren-field {
+      border-bottom: 1px solid #000;
+      min-width: 60px;
+      display: inline-block;
+    }
+
+    /* ---- 印刷用 ---- */
+    @media print {
+      body {
+        background: white;
+        padding: 0;
+        margin: 0;
+      }
+
+      .print-btn,
+      .print-note {
+        display: none;
+      }
+
+      .page {
+        box-shadow: none;
+        margin: 0;
+        padding: 14mm 16mm 12mm;
+        page-break-after: always;
+        width: 100%;
+      }
+
+      .page:last-child {
+        page-break-after: auto;
+      }
+    }
+
+    @page {
+      size: A4 portrait;
+      margin: 0;
+    }
+  </style>
+</head>
+<body>
+
+<button class="print-btn" onclick="window.print()">🖨️ 印刷する（2枚）</button>
+<p class="print-note">印刷後、患者様にご記入いただき、入院当日にご持参ください。</p>
+
+<!-- ========== ページ1: 入院申込書（兼誓約書） ========== -->
+<div class="page">
+
+  <h1>入院申込書（兼誓約書）</h1>
+
+  <div class="hospital-header">
+    医療法人　広正会　井上病院<br>
+    病院長　柏井英助　殿
+  </div>
+
+  <p class="preamble">
+    今般貴院に入院するに際して、下記を含めた院内の諸規則を遵守することを確約いたします。
+    万一、各種規則に違反したとき、またはほかの患者様の迷惑になると判断されたときは、貴院の指示に従い即時退院することを了承し、いかなる場合も、貴院にご迷惑をかけないことを申込者、身元保証人、連帯保証人と連署の上、誓約致します。
+  </p>
+
+  <ol class="pledge">
+    <li>入院料その他の諸費用については、入院者、申込者又は連帯保証人が指定の期日までに全額支払います。</li>
+    <li>本人の身元については、身元保証人において一切の引き受けを致します。</li>
+    <li>退院を支持された場合は、指定の期日に身元保証人の責任において引き取ります。</li>
+    <li>貴院から指示された書類・証明書等は、指定の期日までに提出します。</li>
+    <li>貴重品などの持ち込み品は自己で管理し、万一、盗難や紛失などがあっても貴院には責任を問いません。</li>
+    <li>故意または重過失により貴院の施設・備品などに損害を与えた場合には、連帯保証人と連携して弁償します。</li>
+    <li>病状に応じて病棟・病室の変更をなされても不服・異議申し立てをせず、直ちに貴院の指示に従います。</li>
+  </ol>
+
+  <!-- 入院者 -->
+  <div class="section-label">入院者</div>
+  <table class="form-table">
+    <tr>
+      <th>氏&emsp;名</th>
+      <td>
+        <div class="hanko-cell">
+          <span style="flex:1;"></span>
+          <span style="font-size:12px;">印</span>
+          <span class="hanko-box"></span>
+          <span style="font-size:11px; color:#444; margin-left:8px;">年&nbsp;<span class="field-line" style="min-width:40px;"></span>&nbsp;月&nbsp;<span class="field-line" style="min-width:40px;"></span>&nbsp;日</span>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <th>生年月日</th>
+      <td>
+        <div class="date-field">
+          <span class="field-line" style="min-width:50px;"></span> 年
+          <span class="field-line" style="min-width:40px;"></span> 月
+          <span class="field-line" style="min-width:40px;"></span> 日&ensp;（
+          <span class="field-line" style="min-width:40px;"></span> 歳）
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <th>住&emsp;所</th>
+      <td>〒<span class="field-line" style="min-width:280px;"></span></td>
+    </tr>
+    <tr>
+      <th>連 絡 先</th>
+      <td>
+        <div class="tel-field">
+          <span class="seg" style="min-width:70px;"></span>－
+          <span class="seg" style="min-width:70px;"></span>－
+          <span class="seg" style="min-width:70px;"></span>
+        </div>
+      </td>
+    </tr>
+  </table>
+
+  <!-- 申込者 -->
+  <div class="section-label">申込者</div>
+  <table class="form-table">
+    <tr>
+      <th>氏　　名</th>
+      <td>
+        <div class="hanko-cell">
+          <span style="flex:1;"></span>
+          <span style="font-size:12px;">印</span><span class="hanko-box"></span>
+          <span class="inline-label">（入院者との続柄&ensp;<span class="field-line" style="min-width:60px;"></span>）</span>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <th>生 年 月 日</th>
+      <td>
+        <div class="date-field">
+          <span class="field-line" style="min-width:50px;"></span> 年
+          <span class="field-line" style="min-width:40px;"></span> 月
+          <span class="field-line" style="min-width:40px;"></span> 日&ensp;（
+          <span class="field-line" style="min-width:40px;"></span> 歳）
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <th>住　　所</th>
+      <td>
+        〒<span class="field-line" style="min-width:180px;"></span>
+        <span class="inline-label">電話番号&ensp;
+          <span class="seg" style="min-width:60px;"></span>－
+          <span class="seg" style="min-width:60px;"></span>－
+          <span class="seg" style="min-width:60px;"></span>
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <th>勤 務 先</th>
+      <td>
+        <span class="field-line" style="min-width:160px;"></span>
+        <span class="inline-label">電話番号&ensp;
+          <span class="seg" style="min-width:60px;"></span>－
+          <span class="seg" style="min-width:60px;"></span>－
+          <span class="seg" style="min-width:60px;"></span>
+        </span>
+      </td>
+    </tr>
+  </table>
+
+  <!-- 連帯保証人 -->
+  <div class="section-label">連帯保証人</div>
+  <table class="form-table">
+    <tr>
+      <th>氏　　名</th>
+      <td>
+        <div class="hanko-cell">
+          <span style="flex:1;"></span>
+          <span style="font-size:12px;">印</span><span class="hanko-box"></span>
+          <span class="inline-label">（入院者との続柄&ensp;<span class="field-line" style="min-width:60px;"></span>）</span>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <th>生 年 月 日</th>
+      <td>
+        <div class="date-field">
+          <span class="field-line" style="min-width:50px;"></span> 年
+          <span class="field-line" style="min-width:40px;"></span> 月
+          <span class="field-line" style="min-width:40px;"></span> 日&ensp;（
+          <span class="field-line" style="min-width:40px;"></span> 歳）
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <th>住　　所</th>
+      <td>
+        〒<span class="field-line" style="min-width:180px;"></span>
+        <span class="inline-label">電話番号&ensp;
+          <span class="seg" style="min-width:60px;"></span>－
+          <span class="seg" style="min-width:60px;"></span>－
+          <span class="seg" style="min-width:60px;"></span>
+        </span>
+      </td>
+    </tr>
+    <tr>
+      <th>勤 務 先</th>
+      <td>
+        <span class="field-line" style="min-width:160px;"></span>
+        <span class="inline-label">電話番号&ensp;
+          <span class="seg" style="min-width:60px;"></span>－
+          <span class="seg" style="min-width:60px;"></span>－
+          <span class="seg" style="min-width:60px;"></span>
+        </span>
+      </td>
+    </tr>
+  </table>
+
+  <p class="guarantor-note">
+    私（連帯保証人）は、上記入院患者の一身上に関する引き受け及び入院中の医療費等について未納の場合は、連帯してその責任を負うことを誓います。
+  </p>
+
+</div>
+
+
+<!-- ========== ページ2: 緊急連絡先表 ========== -->
+<div class="page">
+
+  <h2>緊急連絡先表</h2>
+
+  <div class="patient-header">
+    <div class="patient-name-row">
+      患者氏名&ensp;<span class="patient-name-field"></span>&ensp;様
+    </div>
+    <div class="hospital-info-right">
+      医療法人広正会　井上病院<br>
+      理事長　石黒　晴久<br>
+      院　長　柏井　英助
+    </div>
+  </div>
+
+  <div class="privacy-note">
+    当院では個人情報保護法に基づき、患者様並びにご家族の方に病状の説明を行っています。<br>
+    病状の説明は、患者様ご本人と患者様の御家族が希望される方以外には致しません。<br>
+    患者様以外に病状の説明を希望する方を順にお書きください。
+  </div>
+
+  <table class="emergency-table">
+    <thead>
+      <tr>
+        <th></th>
+        <th class="name-cell">お名前</th>
+        <th class="kzk-cell">続柄</th>
+        <th class="addr-cell">住　所</th>
+        <th class="tel-cell">電話・携帯番号</th>
+      </tr>
+    </thead>
+    <tbody>
+      <!-- 1〜5行 -->
+      <tr>
+        <td class="num-cell" rowspan="2">1</td>
+        <td rowspan="2" class="name-cell"></td>
+        <td rowspan="2" class="kzk-cell"></td>
+        <td rowspan="2" class="addr-cell"></td>
+        <td><span class="tel-type">自宅</span></td>
+      </tr>
+      <tr><td><span class="tel-type">職場</span></td></tr>
+
+      <tr>
+        <td class="num-cell" rowspan="2">2</td>
+        <td rowspan="2" class="name-cell"></td>
+        <td rowspan="2" class="kzk-cell"></td>
+        <td rowspan="2" class="addr-cell"></td>
+        <td><span class="tel-type">自宅</span></td>
+      </tr>
+      <tr><td><span class="tel-type">職場</span></td></tr>
+
+      <tr>
+        <td class="num-cell" rowspan="2">3</td>
+        <td rowspan="2" class="name-cell"></td>
+        <td rowspan="2" class="kzk-cell"></td>
+        <td rowspan="2" class="addr-cell"></td>
+        <td><span class="tel-type">自宅</span></td>
+      </tr>
+      <tr><td><span class="tel-type">職場</span></td></tr>
+
+      <tr>
+        <td class="num-cell" rowspan="2">4</td>
+        <td rowspan="2" class="name-cell"></td>
+        <td rowspan="2" class="kzk-cell"></td>
+        <td rowspan="2" class="addr-cell"></td>
+        <td><span class="tel-type">自宅</span></td>
+      </tr>
+      <tr><td><span class="tel-type">職場</span></td></tr>
+
+      <tr>
+        <td class="num-cell" rowspan="2">5</td>
+        <td rowspan="2" class="name-cell"></td>
+        <td rowspan="2" class="kzk-cell"></td>
+        <td rowspan="2" class="addr-cell"></td>
+        <td><span class="tel-type">自宅</span></td>
+      </tr>
+      <tr><td><span class="tel-type">職場</span></td></tr>
+    </tbody>
+  </table>
+
+  <div class="kyuhen-section">
+    <h3>急変時の対応に関して</h3>
+    <p>急変時、上記のご連絡先の順番で連絡させて頂きます。</p>
+    <p>上記のご連絡先で、連絡がつかない場合の異議は申しません。</p>
+    <p style="margin-top:8px;">上記内容了承しました。</p>
+
+    <div class="kyuhen-sign">
+      <span>年</span>
+      <span class="field-underline" style="min-width:50px;"></span>
+      <span>月</span>
+      <span class="field-underline" style="min-width:50px;"></span>
+      <span>日&ensp;</span>
+      <span>氏名</span>
+      <span class="field-underline" style="min-width:160px;"></span>
+      <span style="margin-left:16px;">続柄（</span>
+      <span class="paren-field"></span>
+      <span>）</span>
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>

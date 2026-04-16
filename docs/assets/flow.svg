@@ -21,7 +21,7 @@
     <text x="108" y="26" font-size="13" font-weight="bold" fill="#1a5276">高知脳神経外科にて簡易SAS検査</text>
     <text x="108" y="46" font-size="12" fill="#5d6d7e">SAS疑いと診断 → PSG精査が必要と判断</text>
     <rect x="108" y="54" width="110" height="18" rx="4" fill="#d6eaf8"/>
-    <text x="163" y="66" text-anchor="middle" font-size="11" fill="#1a5276">紹介元クリニック</text>
+    <text x="163" y="66" text-anchor="middle" font-size="11" fill="#1a5276">高知脳神経外科病院</text>
   </g>
 
   <!-- Arrow 1 -->
@@ -78,11 +78,11 @@
     <rect x="40" y="0" width="8" height="96" rx="4" fill="#7d3c98"/>
     <circle cx="80" cy="48" r="18" fill="#7d3c98"/>
     <text x="80" y="53" text-anchor="middle" font-size="15" font-weight="bold" fill="white">⑤</text>
-    <text x="108" y="26" font-size="13" font-weight="bold" fill="#7d3c98">患者様：来院・コロナ抗原検査</text>
+    <text x="108" y="26" font-size="13" font-weight="bold" fill="#7d3c98">患者様：来院・受付</text>
     <rect x="108" y="34" width="310" height="22" rx="4" fill="#fadbd8"/>
-    <text x="263" y="49" text-anchor="middle" font-size="12" font-weight="bold" fill="#c0392b">⚠ 入院時刻：原則 16:30まで</text>
-    <text x="108" y="72" font-size="12" fill="#5d6d7e">病院東側【発熱外来駐車場】に来院後、お電話ください</text>
-    <text x="108" y="88" font-size="12" fill="#5d6d7e">コロナ抗原検査（陰性確認後に正面入口からご入院）</text>
+    <text x="263" y="49" text-anchor="middle" font-size="12" font-weight="bold" fill="#c0392b">⚠ 入院時刻：原則 15:30まで</text>
+    <text x="108" y="72" font-size="12" fill="#5d6d7e">病院駐車場に駐車後、正面入口の受付にお声掛けください</text>
+    <text x="108" y="88" font-size="12" fill="#5d6d7e">病棟スタッフがご案内いたします</text>
   </g>
 
   <!-- Arrow 5 -->
@@ -94,8 +94,8 @@
     <rect x="40" y="0" width="8" height="76" rx="4" fill="#7d3c98"/>
     <circle cx="80" cy="38" r="18" fill="#7d3c98"/>
     <text x="80" y="43" text-anchor="middle" font-size="15" font-weight="bold" fill="white">⑥</text>
-    <text x="108" y="26" font-size="13" font-weight="bold" fill="#7d3c98">PSG機器装着（17:45〜 約40〜60分）</text>
-    <text x="108" y="46" font-size="12" fill="#5d6d7e">検査技師が脳波・呼吸・心電図等のセンサーを装着</text>
+    <text x="108" y="26" font-size="13" font-weight="bold" fill="#7d3c98">PSG機器装着（16:00〜 約40〜60分）</text>
+    <text x="108" y="46" font-size="12" fill="#5d6d7e">検査技師・フクダライフテック技師が脳波・呼吸・心電図等のセンサーを装着</text>
     <text x="108" y="62" font-size="12" fill="#5d6d7e">装着後は病室内トイレまで移動可能です</text>
   </g>
 
@@ -122,7 +122,7 @@
     <circle cx="80" cy="38" r="18" fill="#1a5276"/>
     <text x="80" y="43" text-anchor="middle" font-size="15" font-weight="bold" fill="white">⑧</text>
     <text x="108" y="26" font-size="13" font-weight="bold" fill="#1a5276">翌朝 退院（7:00以降）</text>
-    <text x="108" y="46" font-size="12" fill="#5d6d7e">機器取り外し（朝6:00以降）→ 会計後退院（8:30〜9:00以降）</text>
+    <text x="108" y="46" font-size="12" fill="#5d6d7e">機器取り外し（朝6:00以降）→ 退院（7:00以降）・会計は後日</text>
     <text x="108" y="62" font-size="12" fill="#5d6d7e">検査結果は後日、主治医よりご報告いたします</text>
   </g>
 
