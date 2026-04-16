@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PSG入院 予約依頼票 | 井上病院</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: "Yu Gothic", "游ゴシック", "Hiragino Kaku Gothic Pro", "メイリオ", sans-serif;
+      font-size: 11px;
+      color: #111;
+      background: #f0f0f0;
+    }
+
+    .page {
+      width: 210mm;
+      min-height: 297mm;
+      margin: 12mm auto;
+      padding: 10mm 12mm 10mm 12mm;
+      background: #fff;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    }
+
+    /* FAX送付先バナー */
+    .fax-banner {
+      border: 2.5px solid #1a5276;
+      border-radius: 4px;
+      padding: 6px 12px;
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      background: #eaf0f8;
+    }
+    .fax-banner .fax-label {
+      font-size: 12px;
+      font-weight: 700;
+      color: #1a5276;
+      white-space: nowrap;
+    }
+    .fax-banner .fax-num {
+      font-size: 18px;
+      font-weight: 900;
+      color: #1a5276;
+      letter-spacing: .05em;
+    }
+    .fax-banner .fax-sub {
+      font-size: 10px;
+      color: #444;
+    }
+    .fax-banner .fax-hours {
+      margin-left: auto;
+      font-size: 10px;
+      color: #444;
+      text-align: right;
+      white-space: nowrap;
+    }
+
+    /* タイトル */
+    .form-title {
+      text-align: center;
+      font-size: 16px;
+      font-weight: 900;
+      letter-spacing: .1em;
+      margin-bottom: 2px;
+    }
+    .form-subtitle {
+      text-align: center;
+      font-size: 10px;
+      color: #555;
+      margin-bottom: 6px;
+    }
+
+    /* セクション */
+    .section {
+      margin-bottom: 4px;
+    }
+    .section-header {
+      background: #1a5276;
+      color: #fff;
+      font-size: 10px;
+      font-weight: 700;
+      padding: 2px 8px;
+      letter-spacing: .05em;
+      margin-bottom: 3px;
+    }
+
+    /* 汎用テーブル */
+    table.form-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    table.form-table td, table.form-table th {
+      border: 1px solid #999;
+      padding: 3px 6px;
+      vertical-align: middle;
+      font-size: 11px;
+    }
+    table.form-table th {
+      background: #e8ecf0;
+      font-weight: 700;
+      white-space: nowrap;
+      width: 80px;
+      text-align: left;
+    }
+
+    /* 記入欄（高さのある書き込みボックス） */
+    .write-box {
+      display: inline-block;
+      border-bottom: 1px solid #666;
+      min-width: 120px;
+      height: 18px;
+      vertical-align: bottom;
+    }
+    .write-box-lg {
+      display: inline-block;
+      border-bottom: 1px solid #666;
+      width: 100%;
+      height: 18px;
+      vertical-align: bottom;
+    }
+
+    /* 依頼日・医療機関行 */
+    .meta-row {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 4px;
+      align-items: flex-end;
+      font-size: 11px;
+    }
+    .meta-row .meta-label { white-space: nowrap; font-weight: 700; }
+    .meta-row .meta-field {
+      border-bottom: 1px solid #666;
+      flex: 1;
+      height: 18px;
+    }
+
+    /* チェックボックス */
+    .check-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px 16px;
+      align-items: center;
+    }
+    .check-item {
+      display: flex;
+      align-items: center;
+      gap: 3px;
+      white-space: nowrap;
+    }
+    .check-box {
+      display: inline-block;
+      width: 12px;
+      height: 12px;
+      border: 1px solid #666;
+      border-radius: 2px;
+      flex-shrink: 0;
+    }
+
+    /* 丸チェック */
+    .circle-check {
+      display: inline-block;
+      width: 12px;
+      height: 12px;
+      border: 1px solid #666;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    /* 保険テーブル */
+    table.hoken-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+    table.hoken-table td {
+      border: 1px solid #999;
+      padding: 3px 6px;
+      font-size: 10px;
+      vertical-align: middle;
+    }
+    table.hoken-table .h-label {
+      background: #e8ecf0;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    /* 希望日程 */
+    .date-row {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 3px 0;
+      border-bottom: 1px solid #e0e0e0;
+      font-size: 11px;
+    }
+    .date-row:last-child { border-bottom: none; }
+    .date-label { font-weight: 700; white-space: nowrap; width: 60px; }
+    .date-field {
+      border-bottom: 1px solid #666;
+      width: 32px;
+      height: 18px;
+      display: inline-block;
+      text-align: center;
+    }
+
+    /* 食事希望 */
+    .meal-section {
+      border: 1px solid #999;
+      padding: 4px 8px;
+      margin-top: 4px;
+    }
+    .meal-row {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 3px 0;
+    }
+    .meal-label { font-weight: 700; width: 60px; white-space: nowrap; }
+
+    /* 備考欄 */
+    .biko-box {
+      border: 1px solid #999;
+      height: 36px;
+      width: 100%;
+      margin-top: 2px;
+    }
+
+    /* 受付記入欄 */
+    .office-box {
+      border: 1.5px solid #1a5276;
+      padding: 4px 8px;
+      margin-top: 5px;
+    }
+    .office-box .office-title {
+      font-size: 10px;
+      font-weight: 700;
+      color: #1a5276;
+      margin-bottom: 3px;
+    }
+
+    /* 印刷ボタン */
+    .print-btn {
+      display: block;
+      margin: 10px auto 0;
+      padding: 8px 24px;
+      background: #1a5276;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      font-size: 13px;
+      cursor: pointer;
+    }
+
+    @media print {
+      body { background: none; }
+      .page { margin: 0; box-shadow: none; padding: 8mm 10mm; }
+      .print-btn { display: none; }
+      @page { size: A4 portrait; margin: 0; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="page">
+
+  <!-- FAX送付先 -->
+  <div class="fax-banner">
+    <div class="fax-label">送付先 FAX</div>
+    <div>
+      <div class="fax-num">088-852-2133</div>
+      <div class="fax-sub">医療法人 広正会　井上病院　相談室</div>
+    </div>
+    <div class="fax-hours">
+      受付時間：平日 9:00〜17:00<br>
+      送付後、到着確認のご連絡をお願いします（TEL 088-852-2131）
+    </div>
+  </div>
+
+  <!-- タイトル -->
+  <div class="form-title">PSG検査入院　予約依頼票</div>
+  <div class="form-subtitle">終夜睡眠ポリソムノグラフィー入院検査のご依頼</div>
+
+  <!-- 依頼元情報 -->
+  <div class="section">
+    <div class="section-header">▍ 依頼元情報</div>
+    <table class="form-table">
+      <tr>
+        <th style="width:72px;">依頼日</th>
+        <td style="width:160px;">
+          令和&ensp;<span class="write-box" style="width:28px;"></span>&ensp;年&ensp;
+          <span class="write-box" style="width:22px;"></span>&ensp;月&ensp;
+          <span class="write-box" style="width:22px;"></span>&ensp;日
+        </td>
+        <th style="width:72px;">担当医師名</th>
+        <td><span class="write-box-lg"></span></td>
+      </tr>
+      <tr>
+        <th>医療機関名</th>
+        <td colspan="3">
+          高知脳神経外科病院&ensp;
+          <span style="font-size:10px; color:#555;">（変更がある場合は欄外にご記入ください）</span>
+        </td>
+      </tr>
+      <tr>
+        <th>連絡先 TEL</th>
+        <td><span class="write-box-lg"></span></td>
+        <th>FAX</th>
+        <td><span class="write-box-lg"></span></td>
+      </tr>
+      <tr>
+        <th>担当者名</th>
+        <td colspan="3"><span class="write-box" style="min-width:160px;"></span>&ensp;<span style="font-size:10px; color:#555;">（送付後の連絡先）</span></td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- 患者情報 -->
+  <div class="section">
+    <div class="section-header">▍ 患者情報</div>
+    <table class="form-table">
+      <tr>
+        <th>氏名（漢字）</th>
+        <td colspan="3"><span class="write-box-lg"></span></td>
+      </tr>
+      <tr>
+        <th>氏名（フリガナ）</th>
+        <td colspan="3"><span class="write-box-lg"></span></td>
+      </tr>
+      <tr>
+        <th>生年月日</th>
+        <td>
+          <div class="check-group">
+            <span class="check-item"><span class="check-box"></span>昭和</span>
+            <span class="check-item"><span class="check-box"></span>平成</span>
+            <span class="check-item"><span class="check-box"></span>令和</span>
+          </div>
+          <span class="write-box" style="width:28px;"></span>年
+          <span class="write-box" style="width:22px;"></span>月
+          <span class="write-box" style="width:22px;"></span>日
+        </td>
+        <th style="width:50px;">年齢</th>
+        <td style="width:100px;"><span class="write-box" style="width:36px;"></span>歳</td>
+      </tr>
+      <tr>
+        <th>性別</th>
+        <td>
+          <div class="check-group">
+            <span class="check-item"><span class="check-box"></span>男性</span>
+            <span class="check-item"><span class="check-box"></span>女性</span>
+          </div>
+        </td>
+        <th>体格</th>
+        <td>
+          身長&ensp;<span class="write-box" style="width:36px;"></span>cm&ensp;&ensp;
+          体重&ensp;<span class="write-box" style="width:36px;"></span>kg
+        </td>
+      </tr>
+      <tr>
+        <th>住所</th>
+        <td colspan="3"><span class="write-box-lg"></span></td>
+      </tr>
+      <tr>
+        <th>電話番号</th>
+        <td>
+          自宅&ensp;<span class="write-box" style="width:120px;"></span>
+        </td>
+        <th></th>
+        <td>
+          携帯&ensp;<span class="write-box" style="width:120px;"></span>
+        </td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- 保険情報 -->
+  <div class="section">
+    <div class="section-header">▍ 保険情報</div>
+    <table class="hoken-table">
+      <tr>
+        <td class="h-label" style="width:72px;">保険種別</td>
+        <td colspan="3">
+          <div class="check-group">
+            <span class="check-item"><span class="check-box"></span>社会保険</span>
+            <span class="check-item"><span class="check-box"></span>国民健康保険</span>
+            <span class="check-item"><span class="check-box"></span>後期高齢</span>
+            <span class="check-item"><span class="check-box"></span>生活保護</span>
+            <span class="check-item"><span class="check-box"></span>その他（&ensp;<span class="write-box" style="width:60px;"></span>&ensp;）</span>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td class="h-label">保険者番号</td>
+        <td style="width:130px;"><span class="write-box-lg"></span></td>
+        <td class="h-label" style="width:72px;">記号・番号</td>
+        <td><span class="write-box-lg"></span></td>
+      </tr>
+      <tr>
+        <td class="h-label">被保険者氏名</td>
+        <td><span class="write-box-lg"></span></td>
+        <td class="h-label">本人・家族</td>
+        <td>
+          <div class="check-group">
+            <span class="check-item"><span class="check-box"></span>本人</span>
+            <span class="check-item"><span class="check-box"></span>家族</span>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td class="h-label">公費</td>
+        <td colspan="3">
+          <div class="check-group">
+            <span class="check-item"><span class="check-box"></span>なし</span>
+            <span class="check-item"><span class="check-box"></span>あり&ensp;→&ensp;負担者番号&ensp;<span class="write-box" style="width:80px;"></span>&ensp;受給者番号&ensp;<span class="write-box" style="width:80px;"></span></span>
+          </div>
+        </td>
+      </tr>
+    </table>
+    <div style="font-size:9px; color:#666; margin-top:2px;">※ 可能であれば保険証のコピーを添付してください。</div>
+  </div>
+
+  <!-- 検査情報 -->
+  <div class="section">
+    <div class="section-header">▍ 検査情報</div>
+    <table class="form-table">
+      <tr>
+        <th style="width:72px;">簡易SAS<br>AHI値</th>
+        <td style="width:120px;">
+          <span class="write-box" style="width:48px;"></span>&ensp;回/時
+        </td>
+        <th style="width:60px;">主な症状</th>
+        <td>
+          <div class="check-group">
+            <span class="check-item"><span class="check-box"></span>いびき</span>
+            <span class="check-item"><span class="check-box"></span>日中眠気</span>
+            <span class="check-item"><span class="check-box"></span>呼吸停止の指摘</span>
+            <span class="check-item"><span class="check-box"></span>中途覚醒</span>
+            <span class="check-item"><span class="check-box"></span>その他</span>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <th>既往歴・<br>内服薬</th>
+        <td colspan="3"><span class="write-box-lg"></span></td>
+      </tr>
+      <tr>
+        <th>特記事項</th>
+        <td colspan="3"><span class="write-box-lg"></span></td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- 希望日程・食事希望 -->
+  <div class="section">
+    <div class="section-header">▍ 希望日程・食事</div>
+    <table class="form-table">
+      <tr>
+        <th style="width:72px; vertical-align:top; padding-top:6px;">希望日程</th>
+        <td style="width:220px;">
+          <div class="date-row">
+            <span class="date-label">第1希望</span>
+            令和&ensp;<span class="date-field"></span>年&ensp;<span class="date-field"></span>月&ensp;<span class="date-field"></span>日
+          </div>
+          <div class="date-row">
+            <span class="date-label">第2希望</span>
+            令和&ensp;<span class="date-field"></span>年&ensp;<span class="date-field"></span>月&ensp;<span class="date-field"></span>日
+          </div>
+          <div class="date-row">
+            <span class="date-label">第3希望</span>
+            令和&ensp;<span class="date-field"></span>年&ensp;<span class="date-field"></span>月&ensp;<span class="date-field"></span>日
+          </div>
+        </td>
+        <th style="width:52px; vertical-align:top; padding-top:6px;">食事希望</th>
+        <td>
+          <div style="padding: 3px 0; border-bottom: 1px solid #e0e0e0;">
+            <span style="font-weight:700; margin-right:10px;">夕食</span>
+            <div class="check-group" style="display:inline-flex;">
+              <span class="check-item"><span class="check-box"></span>希望する</span>
+              <span class="check-item"><span class="check-box"></span>希望しない</span>
+            </div>
+          </div>
+          <div style="padding: 3px 0; border-bottom: 1px solid #e0e0e0;">
+            <span style="font-weight:700; margin-right:10px;">朝食</span>
+            <div class="check-group" style="display:inline-flex;">
+              <span class="check-item"><span class="check-box"></span>希望する</span>
+              <span class="check-item"><span class="check-box"></span>希望しない</span>
+            </div>
+          </div>
+          <div style="font-size:9px; color:#666; padding-top:3px;">
+            ※ 夕食希望の方は入院前にお申し出ください<br>
+            ※ 当日の昼食はとらずに来院してください
+          </div>
+        </td>
+      </tr>
+    </table>
+  </div>
+
+  <!-- 備考 -->
+  <div class="section">
+    <div class="section-header">▍ 備考</div>
+    <div class="biko-box"></div>
+  </div>
+
+  <!-- 受付記入欄 -->
+  <div class="office-box">
+    <div class="office-title">【井上病院 受付記入欄】</div>
+    <table class="hoken-table">
+      <tr>
+        <td class="h-label" style="width:72px;">受付日時</td>
+        <td style="width:180px;"></td>
+        <td class="h-label" style="width:72px;">担当者</td>
+        <td></td>
+        <td class="h-label" style="width:72px;">予約確定日</td>
+        <td></td>
+      </tr>
+    </table>
+  </div>
+
+</div><!-- /page -->
+
+<button class="print-btn" onclick="window.print()">🖨 印刷する</button>
+
+</body>
+</html>
