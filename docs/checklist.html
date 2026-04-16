@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>チェックリスト | PSG検査入院 | 井上病院</title>
+  <link rel="stylesheet" href="assets/style.css">
+  <style>
+    .phase-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin: 0 0 14px;
+    }
+    .phase-badge {
+      background: var(--primary);
+      color: white;
+      font-size: 12px;
+      font-weight: 700;
+      padding: 4px 12px;
+      border-radius: 20px;
+      white-space: nowrap;
+    }
+    .phase-badge.green { background: var(--accent); }
+    .phase-badge.purple { background: #7d3c98; }
+    .phase-title {
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--primary-dk);
+    }
+    .progress-bar-wrap {
+      background: #eaf0fb;
+      border-radius: 20px;
+      height: 10px;
+      margin-bottom: 6px;
+      overflow: hidden;
+    }
+    .progress-bar {
+      height: 10px;
+      background: var(--primary);
+      border-radius: 20px;
+      transition: width .4s ease;
+    }
+    .progress-label {
+      font-size: 12px;
+      color: var(--gray);
+      text-align: right;
+    }
+    .reset-btn {
+      background: none;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 6px 14px;
+      font-size: 13px;
+      color: var(--gray);
+      cursor: pointer;
+    }
+    .reset-btn:hover { background: var(--gray-lt); }
+    .note-text {
+      font-size: 12px;
+      color: var(--gray);
+      margin-top: 8px;
+      font-style: italic;
+    }
+  </style>
+</head>
+<body>
+
+<header class="site-header">
+  <div>
+    <div class="hospital-name">医療法人 広正会　井上病院</div>
+    <div class="page-title">PSG検査入院 受け入れご案内</div>
+  </div>
+</header>
+
+<nav class="site-nav">
+  <a href="index.html">ご案内・フロー</a>
+  <a href="checklist.html" class="active">チェックリスト</a>
+  <a href="contact.html">連絡先・窓口</a>
+</nav>
+
+<main class="container">
+
+  <div class="alert alert-info" style="margin-bottom:24px;">
+    <div class="alert-title">📋 このチェックリストについて</div>
+    <p style="font-size:14px; margin-top:4px;">予約時・入院前・退院時の確認事項を時系列で整理しています。チェックボックスはこのページを開いている間のみ有効です（保存されません）。</p>
+  </div>
+
+  <!-- 全体進捗 -->
+  <section class="section" style="padding:20px 28px;">
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+      <span style="font-weight:700; color:var(--primary-dk);">全体の進捗</span>
+      <button class="reset-btn" onclick="resetAll()">リセット</button>
+    </div>
+    <div class="progress-bar-wrap">
+      <div class="progress-bar" id="total-bar" style="width:0%"></div>
+    </div>
+    <div class="progress-label" id="total-label">0 / 0 完了</div>
+  </section>
+
+  <!-- Phase 1: 予約時（紹介元スタッフ用） -->
+  <section class="section">
+    <div class="phase-header">
+      <span class="phase-badge">STEP 1</span>
+      <span class="phase-title">予約時（高知脳神経外科スタッフ用）</span>
+    </div>
+    <ul class="checklist" id="phase1">
+      <li>
+        <input type="checkbox" id="c1_1" onchange="updateProgress()">
+        <label class="check-label" for="c1_1">患者氏名・ふりがな・生年月日・性別・連絡先を伝えた</label>
+      </li>
+      <li>
+        <input type="checkbox" id="c1_2" onchange="updateProgress()">
+        <label class="check-label" for="c1_2">身長・体重を伝えた（PSGレポートのBMI算出に使用）</label>
+      </li>
+      <li>
+        <input type="checkbox" id="c1_3" onchange="updateProgress()">
+        <label class="check-label" for="c1_3">簡易SAS検査のAHI値・検査結果を伝えた</label>
+      </li>
+      <li>
+        <input type="checkbox" id="c1_4" onchange="updateProgress()">
+        <label class="check-label" for="c1_4">希望入院日（第1・第2希望）を伝えた</label>
+      </li>
+      <li>
+        <input type="checkbox" id="c1_5" onchange="updateProgress()">
+        <label class="check-label" for="c1_5">常用薬（特に睡眠薬・抗不安薬）の有無と薬剤名を伝えた</label>
+      </li>
+      <li>
+        <input type="checkbox" id="c1_6" onchange="updateProgress()">
+        <label class="check-label" for="c1_6">担当医師名・送付者・送付日を予約依頼票に記入してFAX送付した</label>
+      </li>
+      <li>
+        <input type="checkbox" id="c1_7" onchange="updateProgress()">
+        <label class="check-label" for="c1_7">井上病院から入院同意書が届いた（患者様に渡して事前記載を依頼する）</label>
+      </li>
+    </ul>
+    <p class="note-text">※ 予約連絡は検査希望日の1週間前までにお願いします</p>
+  </section>
+
+  <!-- Phase 2: 入院前（患者様への説明） -->
+  <section class="section">
+    <div class="phase-header">
+      <span class="phase-badge green">STEP 2</span>
+      <span class="phase-title">入院前（患者様への説明事項）</span>
+    </div>
+    <ul class="checklist" id="phase2">
+      <li>
+        <input type="checkbox" id="c2_1" onchange="updateProgress()">
+        <label class="check-label" for="c2_1">入院同意書を記載のうえ当日持参するよう伝えた</label>
+      </li>
+      <li>
+        <input type="checkbox" id="c2_2" onchange="updateProgress()">
+        <label class="check-label" for="c2_2">入院時刻（原則16:30まで）を伝えた</label>
+      </li>
+      <li>
+        <input type="checkbox" id="c2_3" onchange="updateProgress()">
+        <label class="check-label" for="c2_3">来院時は<strong>病院東側・発熱外来駐車場</strong>に来てから電話するよう伝えた</label>
+      </li>
+      <li>
+        <input type="checkbox" id="c2_4" onchange="updateProgress()">
+        <label class="check-label" for="c2_4">当日は昼寝・飲酒・カフェインを控えるよう伝えた</label>
+      </li>
+      <li>
+        <input type="checkbox" id="c2_5" onchange="updateProgress()">
+        <label class="check-label" for="c2_5">検査前に洗髪・洗顔・整髪料除去を済ませるよう伝えた</label>
+      </li>
+      <li>
+        <input type="checkbox" id="c2_6" onchange="updateProgress()">
+        <label class="check-label" for="c2_6">化粧・マニキュア・アクセサリーは外してくるよう伝えた</label>
+      </li>
+      <li>
+        <input type="checkbox" id="c2_7" onchange="updateProgress()">
+        <label class="check-label" for="c2_7">常用薬（全種類）を持参するよう伝えた</label>
+      </li>
+      <li>
+        <input type="checkbox" id="c2_8" onchange="updateProgress()">
+        <label class="check-label" for="c2_8">寝衣・タオル・スリッパ・ストロー等の持ち物を伝えた</label>
+      </li>
+      <li>
+        <input type="checkbox" id="c2_9" onchange="updateProgress()">
+        <label class="check-label" for="c2_9">テレビカード（1枚1,000円）が必要なことを伝えた</label>
+      </li>
+      <li>
+        <input type="checkbox" id="c2_10" onchange="updateProgress()">
+        <label class="check-label" for="c2_10">食事・入浴の希望を確認し、井上病院に伝えた</label>
+      </li>
+    </ul>
+  </section>
+
+  <!-- Phase 3: 入院当日（井上病院スタッフ用） -->
+  <section class="section">
+    <div class="phase-header">
+      <span class="phase-badge purple">STEP 3</span>
+      <span class="phase-title">入院当日（井上病院スタッフ用）</span>
+    </div>
+    <ul class="checklist" id="phase3">
+      <li>
+        <input type="checkbox" id="c3_1" onchange="updateProgress()">
+        <label class="check-label" for="c3_1">発熱外来駐車場にてコロナ抗原検査を実施・陰性確認</label>
+      </li>
+      <li>
+        <input type="checkbox" id="c3_2" onchange="updateProgress()">
+        <label class="check-label" for="c3_2">正面入口より入院案内・受付へ誘導</label>
+      </li>
+      <li>
+        <input type="checkbox" id="c3_3" onchange="updateProgress()">
+        <label class="check-label" for="c3_3">V/S測定・電子カルテ入力</label>
+      </li>
+      <li>
+        <input type="checkbox" id="c3_4" onchange="updateProgress()">
+        <label class="check-label" for="c3_4">医療病棟2Fへの受け入れ連絡を完了</label>
+      </li>
+      <li>
+        <input type="checkbox" id="c3_5" onchange="updateProgress()">
+        <label class="check-label" for="c3_5">入院診療計画書・同意書コピー・患者情報をクリアファイルに入れて病棟Nsに渡した</label>
+      </li>
+      <li>
+        <input type="checkbox" id="c3_6" onchange="updateProgress()">
+        <label class="check-label" for="c3_6">PSG機器装着（17:45〜）をフクダライフテック技師が実施</label>
+      </li>
+    </ul>
+  </section>
+
+  <!-- Phase 4: 退院時 -->
+  <section class="section">
+    <div class="phase-header">
+      <span class="phase-badge">STEP 4</span>
+      <span class="phase-title">退院時</span>
+    </div>
+    <ul class="checklist" id="phase4">
+      <li>
+        <input type="checkbox" id="c4_1" onchange="updateProgress()">
+        <label class="check-label" for="c4_1">朝6:00以降にPSG機器の取り外し完了</label>
+      </li>
+      <li>
+        <input type="checkbox" id="c4_2" onchange="updateProgress()">
+        <label class="check-label" for="c4_2">PSGデータの回収完了</label>
+      </li>
+      <li>
+        <input type="checkbox" id="c4_3" onchange="updateProgress()">
+        <label class="check-label" for="c4_3">会計処理完了（8:30〜9:00以降）</label>
+      </li>
+      <li>
+        <input type="checkbox" id="c4_4" onchange="updateProgress()">
+        <label class="check-label" for="c4_4">患者様への退院説明・次回外来受診日を伝達</label>
+      </li>
+      <li>
+        <input type="checkbox" id="c4_5" onchange="updateProgress()">
+        <label class="check-label" for="c4_5">検査結果の報告予定（後日、主治医より）を患者様に伝えた</label>
+      </li>
+      <li>
+        <input type="checkbox" id="c4_6" onchange="updateProgress()">
+        <label class="check-label" for="c4_6">紹介元（高知脳神経外科）への検査結果報告を行った</label>
+      </li>
+    </ul>
+  </section>
+
+  <div class="btn-group">
+    <a href="index.html" class="btn btn-outline">← ご案内・フローに戻る</a>
+    <a href="contact.html" class="btn btn-primary">担当窓口・連絡先 →</a>
+  </div>
+
+</main>
+
+<footer class="site-footer">
+  <p>医療法人 広正会　井上病院（高知県高知市）&ensp;|&ensp;TEL: 088-852-2131</p>
+</footer>
+
+<script>
+  function updateProgress() {
+    const all = document.querySelectorAll('.checklist input[type="checkbox"]');
+    const checked = document.querySelectorAll('.checklist input[type="checkbox"]:checked');
+    const pct = all.length ? Math.round(checked.length / all.length * 100) : 0;
+    document.getElementById('total-bar').style.width = pct + '%';
+    document.getElementById('total-label').textContent = checked.length + ' / ' + all.length + ' 完了';
+
+    // Strike through checked items
+    all.forEach(cb => {
+      const li = cb.closest('li');
+      if (cb.checked) li.classList.add('checked');
+      else li.classList.remove('checked');
+    });
+  }
+
+  function resetAll() {
+    document.querySelectorAll('.checklist input[type="checkbox"]').forEach(cb => {
+      cb.checked = false;
+    });
+    updateProgress();
+  }
+
+  // Init
+  updateProgress();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,129 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 980" width="520" height="980" font-family="'Hiragino Sans','Meiryo','Yu Gothic',sans-serif">
+
+  <!-- Background -->
+  <rect width="520" height="980" fill="#f4f8fd" rx="12"/>
+
+  <!-- Title -->
+  <rect x="20" y="16" width="480" height="44" rx="8" fill="#1a5276"/>
+  <text x="260" y="44" text-anchor="middle" font-size="16" font-weight="bold" fill="white">PSG入院 予約〜退院フロー</text>
+
+  <!-- Vertical guide line -->
+  <line x1="260" y1="72" x2="260" y2="940" stroke="#aed6f1" stroke-width="2" stroke-dasharray="6,4"/>
+
+  <!-- Step definitions: (y, icon, color-bg, color-border, label, sub) -->
+
+  <!-- Step 1 -->
+  <g transform="translate(0, 80)">
+    <rect x="40" y="0" width="440" height="76" rx="8" fill="white" stroke="#1a5276" stroke-width="1.5"/>
+    <rect x="40" y="0" width="8" height="76" rx="4" fill="#1a5276"/>
+    <circle cx="80" cy="38" r="18" fill="#1a5276"/>
+    <text x="80" y="43" text-anchor="middle" font-size="15" font-weight="bold" fill="white">①</text>
+    <text x="108" y="26" font-size="13" font-weight="bold" fill="#1a5276">高知脳神経外科にて簡易SAS検査</text>
+    <text x="108" y="46" font-size="12" fill="#5d6d7e">SAS疑いと診断 → PSG精査が必要と判断</text>
+    <rect x="108" y="54" width="110" height="18" rx="4" fill="#d6eaf8"/>
+    <text x="163" y="66" text-anchor="middle" font-size="11" fill="#1a5276">紹介元クリニック</text>
+  </g>
+
+  <!-- Arrow 1 -->
+  <polygon points="254,170 266,170 260,186" fill="#1a5276"/>
+
+  <!-- Step 2 -->
+  <g transform="translate(0, 195)">
+    <rect x="40" y="0" width="440" height="86" rx="8" fill="white" stroke="#1a5276" stroke-width="1.5"/>
+    <rect x="40" y="0" width="8" height="86" rx="4" fill="#1a5276"/>
+    <circle cx="80" cy="43" r="18" fill="#1a5276"/>
+    <text x="80" y="48" text-anchor="middle" font-size="15" font-weight="bold" fill="white">②</text>
+    <text x="108" y="28" font-size="13" font-weight="bold" fill="#1a5276">井上病院へ予約連絡（FAX/電話）</text>
+    <rect x="108" y="36" width="300" height="22" rx="4" fill="#fadbd8"/>
+    <text x="258" y="51" text-anchor="middle" font-size="12" font-weight="bold" fill="#c0392b">⚠ 検査希望日の1週間前までにご連絡ください</text>
+    <text x="108" y="76" font-size="12" fill="#5d6d7e">予約依頼票（患者氏名・生年月日・AHI値等）をFAX送付</text>
+  </g>
+
+  <!-- Arrow 2 -->
+  <polygon points="254,294 266,294 260,310" fill="#1a5276"/>
+
+  <!-- Step 3 -->
+  <g transform="translate(0, 318)">
+    <rect x="40" y="0" width="440" height="76" rx="8" fill="white" stroke="#1e8449" stroke-width="1.5"/>
+    <rect x="40" y="0" width="8" height="76" rx="4" fill="#1e8449"/>
+    <circle cx="80" cy="38" r="18" fill="#1e8449"/>
+    <text x="80" y="43" text-anchor="middle" font-size="15" font-weight="bold" fill="white">③</text>
+    <text x="108" y="26" font-size="13" font-weight="bold" fill="#1e8449">井上病院：受け入れ準備</text>
+    <text x="108" y="46" font-size="12" fill="#5d6d7e">個室（医療病棟2F）確保・フクダライフテックへ機器手配</text>
+    <rect x="108" y="54" width="90" height="18" rx="4" fill="#d5f5e3"/>
+    <text x="153" y="66" text-anchor="middle" font-size="11" fill="#1e8449">井上病院スタッフ</text>
+  </g>
+
+  <!-- Arrow 3 -->
+  <polygon points="254,406 266,406 260,422" fill="#1a5276"/>
+
+  <!-- Step 4 -->
+  <g transform="translate(0, 430)">
+    <rect x="40" y="0" width="440" height="76" rx="8" fill="white" stroke="#1e8449" stroke-width="1.5"/>
+    <rect x="40" y="0" width="8" height="76" rx="4" fill="#1e8449"/>
+    <circle cx="80" cy="38" r="18" fill="#1e8449"/>
+    <text x="80" y="43" text-anchor="middle" font-size="15" font-weight="bold" fill="white">④</text>
+    <text x="108" y="26" font-size="13" font-weight="bold" fill="#1e8449">入院同意書を患者様へ送付・事前記載依頼</text>
+    <text x="108" y="46" font-size="12" fill="#5d6d7e">医事課より同意書を送付 → 記載のうえ当日ご持参ください</text>
+    <rect x="108" y="54" width="90" height="18" rx="4" fill="#d5f5e3"/>
+    <text x="153" y="66" text-anchor="middle" font-size="11" fill="#1e8449">井上病院医事課</text>
+  </g>
+
+  <!-- Arrow 4 -->
+  <polygon points="254,518 266,518 260,534" fill="#1a5276"/>
+
+  <!-- Step 5 -->
+  <g transform="translate(0, 542)">
+    <rect x="40" y="0" width="440" height="96" rx="8" fill="white" stroke="#7d3c98" stroke-width="1.5"/>
+    <rect x="40" y="0" width="8" height="96" rx="4" fill="#7d3c98"/>
+    <circle cx="80" cy="48" r="18" fill="#7d3c98"/>
+    <text x="80" y="53" text-anchor="middle" font-size="15" font-weight="bold" fill="white">⑤</text>
+    <text x="108" y="26" font-size="13" font-weight="bold" fill="#7d3c98">患者様：来院・コロナ抗原検査</text>
+    <rect x="108" y="34" width="310" height="22" rx="4" fill="#fadbd8"/>
+    <text x="263" y="49" text-anchor="middle" font-size="12" font-weight="bold" fill="#c0392b">⚠ 入院時刻：原則 16:30まで</text>
+    <text x="108" y="72" font-size="12" fill="#5d6d7e">病院東側【発熱外来駐車場】に来院後、お電話ください</text>
+    <text x="108" y="88" font-size="12" fill="#5d6d7e">コロナ抗原検査（陰性確認後に正面入口からご入院）</text>
+  </g>
+
+  <!-- Arrow 5 -->
+  <polygon points="254,650 266,650 260,666" fill="#1a5276"/>
+
+  <!-- Step 6 -->
+  <g transform="translate(0, 674)">
+    <rect x="40" y="0" width="440" height="76" rx="8" fill="white" stroke="#7d3c98" stroke-width="1.5"/>
+    <rect x="40" y="0" width="8" height="76" rx="4" fill="#7d3c98"/>
+    <circle cx="80" cy="38" r="18" fill="#7d3c98"/>
+    <text x="80" y="43" text-anchor="middle" font-size="15" font-weight="bold" fill="white">⑥</text>
+    <text x="108" y="26" font-size="13" font-weight="bold" fill="#7d3c98">PSG機器装着（17:45〜 約40〜60分）</text>
+    <text x="108" y="46" font-size="12" fill="#5d6d7e">検査技師が脳波・呼吸・心電図等のセンサーを装着</text>
+    <text x="108" y="62" font-size="12" fill="#5d6d7e">装着後は病室内トイレまで移動可能です</text>
+  </g>
+
+  <!-- Arrow 6 -->
+  <polygon points="254,762 266,762 260,778" fill="#1a5276"/>
+
+  <!-- Step 7 -->
+  <g transform="translate(0, 786)">
+    <rect x="40" y="0" width="440" height="66" rx="8" fill="white" stroke="#7d3c98" stroke-width="1.5"/>
+    <rect x="40" y="0" width="8" height="66" rx="4" fill="#7d3c98"/>
+    <circle cx="80" cy="33" r="18" fill="#7d3c98"/>
+    <text x="80" y="38" text-anchor="middle" font-size="15" font-weight="bold" fill="white">⑦</text>
+    <text x="108" y="24" font-size="13" font-weight="bold" fill="#7d3c98">終夜PSG検査（消灯〜翌朝）</text>
+    <text x="108" y="44" font-size="12" fill="#5d6d7e">眠れない場合は睡眠薬をご用意できます（申し出ください）</text>
+  </g>
+
+  <!-- Arrow 7 -->
+  <polygon points="254,864 266,864 260,880" fill="#1a5276"/>
+
+  <!-- Step 8 -->
+  <g transform="translate(0, 888)">
+    <rect x="40" y="0" width="440" height="76" rx="8" fill="white" stroke="#1a5276" stroke-width="1.5"/>
+    <rect x="40" y="0" width="8" height="76" rx="4" fill="#1a5276"/>
+    <circle cx="80" cy="38" r="18" fill="#1a5276"/>
+    <text x="80" y="43" text-anchor="middle" font-size="15" font-weight="bold" fill="white">⑧</text>
+    <text x="108" y="26" font-size="13" font-weight="bold" fill="#1a5276">翌朝 退院（7:00以降）</text>
+    <text x="108" y="46" font-size="12" fill="#5d6d7e">機器取り外し（朝6:00以降）→ 会計後退院（8:30〜9:00以降）</text>
+    <text x="108" y="62" font-size="12" fill="#5d6d7e">検査結果は後日、主治医よりご報告いたします</text>
+  </g>
+
+</svg>

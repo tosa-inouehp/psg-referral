@@ -1,0 +1,334 @@
+/* =============================================
+   井上病院 PSG入院案内 — 共通スタイル
+   ============================================= */
+
+:root {
+  --primary:     #1a5276;
+  --primary-dk:  #154360;
+  --primary-lt:  #d6eaf8;
+  --accent:      #1e8449;
+  --accent-lt:   #d5f5e3;
+  --warn:        #c0392b;
+  --warn-lt:     #fadbd8;
+  --gray-dk:     #2c3e50;
+  --gray:        #5d6d7e;
+  --gray-lt:     #eaf0fb;
+  --border:      #aed6f1;
+  --white:       #ffffff;
+  --radius:      8px;
+  --shadow:      0 2px 12px rgba(26,82,118,.12);
+}
+
+/* ---- Reset & Base ---- */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: "Hiragino Sans", "Meiryo", "Yu Gothic", sans-serif;
+  font-size: 15px;
+  line-height: 1.75;
+  color: var(--gray-dk);
+  background: #f4f8fd;
+}
+
+a { color: var(--primary); text-decoration: none; }
+a:hover { text-decoration: underline; }
+
+img { max-width: 100%; }
+
+/* ---- Header ---- */
+.site-header {
+  background: var(--primary);
+  color: var(--white);
+  padding: 18px 24px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.site-header .hospital-name {
+  font-size: 13px;
+  opacity: .85;
+  letter-spacing: .04em;
+}
+
+.site-header .page-title {
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: .02em;
+}
+
+/* ---- Nav ---- */
+.site-nav {
+  background: var(--primary-dk);
+  display: flex;
+  overflow-x: auto;
+}
+
+.site-nav a {
+  color: rgba(255,255,255,.85);
+  padding: 10px 20px;
+  font-size: 14px;
+  white-space: nowrap;
+  border-bottom: 3px solid transparent;
+  transition: all .2s;
+}
+
+.site-nav a:hover,
+.site-nav a.active {
+  color: var(--white);
+  border-bottom-color: #5dade2;
+  text-decoration: none;
+  background: rgba(255,255,255,.08);
+}
+
+/* ---- Main Layout ---- */
+.container {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 32px 20px 60px;
+}
+
+/* ---- Section ---- */
+.section {
+  background: var(--white);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 28px 32px;
+  margin-bottom: 28px;
+}
+
+.section-title {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--primary);
+  border-left: 4px solid var(--primary);
+  padding-left: 12px;
+  margin-bottom: 18px;
+}
+
+/* ---- Alert Boxes ---- */
+.alert {
+  border-radius: var(--radius);
+  padding: 16px 20px;
+  margin-bottom: 16px;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.alert-warn {
+  background: var(--warn-lt);
+  border-left: 4px solid var(--warn);
+  color: #7b241c;
+}
+
+.alert-info {
+  background: var(--primary-lt);
+  border-left: 4px solid var(--primary);
+  color: var(--primary-dk);
+}
+
+.alert-ok {
+  background: var(--accent-lt);
+  border-left: 4px solid var(--accent);
+  color: #1a5e35;
+}
+
+.alert .alert-title {
+  font-weight: 700;
+  font-size: 15px;
+  margin-bottom: 6px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* ---- Info Grid ---- */
+.info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-top: 4px;
+}
+
+.info-card {
+  background: var(--gray-lt);
+  border-radius: var(--radius);
+  padding: 14px 16px;
+}
+
+.info-card .label {
+  font-size: 12px;
+  color: var(--gray);
+  font-weight: 600;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  margin-bottom: 4px;
+}
+
+.info-card .value {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--primary-dk);
+}
+
+.info-card .sub {
+  font-size: 12px;
+  color: var(--gray);
+  margin-top: 2px;
+}
+
+/* ---- Flow SVG wrapper ---- */
+.flow-wrap {
+  text-align: center;
+  margin: 8px 0;
+}
+
+.flow-wrap svg,
+.flow-wrap img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* ---- Button ---- */
+.btn {
+  display: inline-block;
+  padding: 12px 28px;
+  border-radius: 6px;
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all .2s;
+  text-align: center;
+}
+
+.btn-primary {
+  background: var(--primary);
+  color: var(--white);
+}
+
+.btn-primary:hover {
+  background: var(--primary-dk);
+  text-decoration: none;
+  color: var(--white);
+}
+
+.btn-outline {
+  background: var(--white);
+  color: var(--primary);
+  border: 2px solid var(--primary);
+}
+
+.btn-outline:hover {
+  background: var(--primary-lt);
+  text-decoration: none;
+}
+
+.btn-group {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+
+/* ---- Checklist ---- */
+.checklist { list-style: none; }
+
+.checklist li {
+  padding: 9px 0;
+  border-bottom: 1px solid #eaf0fb;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 14px;
+}
+
+.checklist li:last-child { border-bottom: none; }
+
+.checklist input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  margin-top: 2px;
+  accent-color: var(--primary);
+  flex-shrink: 0;
+  cursor: pointer;
+}
+
+.checklist .check-label { flex: 1; }
+
+.checklist li.checked .check-label {
+  text-decoration: line-through;
+  color: var(--gray);
+}
+
+/* ---- Step badge ---- */
+.step-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--primary);
+  color: var(--white);
+  font-size: 13px;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+/* ---- Table ---- */
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.data-table th {
+  background: var(--primary);
+  color: var(--white);
+  padding: 10px 14px;
+  text-align: left;
+  font-weight: 600;
+}
+
+.data-table td {
+  padding: 10px 14px;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+}
+
+.data-table tr:nth-child(even) td { background: var(--gray-lt); }
+
+/* ---- Footer ---- */
+.site-footer {
+  background: var(--primary-dk);
+  color: rgba(255,255,255,.75);
+  text-align: center;
+  padding: 20px;
+  font-size: 13px;
+}
+
+.site-footer a { color: rgba(255,255,255,.9); }
+
+/* ---- Utilities ---- */
+.text-center { text-align: center; }
+.text-warn   { color: var(--warn); font-weight: 700; }
+.text-ok     { color: var(--accent); font-weight: 700; }
+.mb-0 { margin-bottom: 0; }
+.mt-8 { margin-top: 8px; }
+.mt-16 { margin-top: 16px; }
+
+/* ---- Responsive ---- */
+@media (max-width: 600px) {
+  .section { padding: 20px 16px; }
+  .info-grid { grid-template-columns: 1fr; }
+  .btn-group { flex-direction: column; }
+  .site-header .page-title { font-size: 17px; }
+}
+
+/* ---- Print ---- */
+@media print {
+  .site-nav, .btn-group, .site-footer { display: none; }
+  body { background: white; font-size: 13px; }
+  .section { box-shadow: none; border: 1px solid #ccc; page-break-inside: avoid; }
+  .container { padding: 10px; }
+}
