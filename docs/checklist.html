@@ -107,31 +107,19 @@
     <ul class="checklist" id="phase1">
       <li>
         <input type="checkbox" id="c1_1" onchange="updateProgress()">
-        <label class="check-label" for="c1_1">患者氏名・ふりがな・生年月日・性別・連絡先を伝えた</label>
+        <label class="check-label" for="c1_1">予約依頼票を印刷した（案内ページの「予約依頼票を印刷する」より）</label>
       </li>
       <li>
         <input type="checkbox" id="c1_2" onchange="updateProgress()">
-        <label class="check-label" for="c1_2">身長・体重を伝えた（PSGレポートのBMI算出に使用）</label>
+        <label class="check-label" for="c1_2">患者情報（氏名・生年月日・身長・体重・連絡先）・AHI値・希望入院日・常用薬等の必要事項をすべて記載した</label>
       </li>
       <li>
         <input type="checkbox" id="c1_3" onchange="updateProgress()">
-        <label class="check-label" for="c1_3">簡易SAS検査のAHI値・検査結果を伝えた</label>
+        <label class="check-label" for="c1_3">担当医師名・送付者名・送付日を記入のうえ、井上病院 相談室へFAX送付した（088-852-2133）</label>
       </li>
       <li>
         <input type="checkbox" id="c1_4" onchange="updateProgress()">
-        <label class="check-label" for="c1_4">希望入院日（第1・第2希望）を伝えた</label>
-      </li>
-      <li>
-        <input type="checkbox" id="c1_5" onchange="updateProgress()">
-        <label class="check-label" for="c1_5">常用薬（特に睡眠薬・抗不安薬）の有無と薬剤名を伝えた</label>
-      </li>
-      <li>
-        <input type="checkbox" id="c1_6" onchange="updateProgress()">
-        <label class="check-label" for="c1_6">担当医師名・送付者・送付日を予約依頼票に記入してFAX送付した</label>
-      </li>
-      <li>
-        <input type="checkbox" id="c1_7" onchange="updateProgress()">
-        <label class="check-label" for="c1_7">井上病院から入院同意書が届いた（患者様に渡して事前記載を依頼する）</label>
+        <label class="check-label" for="c1_4">FAX送付後、電話にて到着確認を行った（088-852-2131）</label>
       </li>
     </ul>
     <p class="note-text">※ 予約連絡は検査希望日の1週間前までにお願いします</p>
@@ -146,7 +134,11 @@
     <ul class="checklist" id="phase2">
       <li>
         <input type="checkbox" id="c2_1" onchange="updateProgress()">
-        <label class="check-label" for="c2_1">入院同意書を記載のうえ当日持参するよう伝えた</label>
+        <label class="check-label" for="c2_1">入院診療計画書兼同意書・入院申込書を院内で印刷し、患者様へ内容を説明した</label>
+      </li>
+      <li>
+        <input type="checkbox" id="c2_1b" onchange="updateProgress()">
+        <label class="check-label" for="c2_1b">必要事項に署名をいただき、来院当日に持参するよう伝えた</label>
       </li>
       <li>
         <input type="checkbox" id="c2_2" onchange="updateProgress()">
@@ -196,27 +188,19 @@
     <ul class="checklist" id="phase3">
       <li>
         <input type="checkbox" id="c3_1" onchange="updateProgress()">
-        <label class="check-label" for="c3_1">病院駐車場への駐車を確認・受付にて入院手続き開始</label>
+        <label class="check-label" for="c3_1">V/S測定・電子カルテ入力</label>
       </li>
       <li>
         <input type="checkbox" id="c3_2" onchange="updateProgress()">
-        <label class="check-label" for="c3_2">正面入口より入院案内・受付へ誘導</label>
+        <label class="check-label" for="c3_2">医療病棟2Fへの受け入れ連絡を完了</label>
       </li>
       <li>
         <input type="checkbox" id="c3_3" onchange="updateProgress()">
-        <label class="check-label" for="c3_3">V/S測定・電子カルテ入力</label>
+        <label class="check-label" for="c3_3">入院診療計画書・同意書コピー・患者情報をクリアファイルに入れて病棟Nsに渡した</label>
       </li>
       <li>
         <input type="checkbox" id="c3_4" onchange="updateProgress()">
-        <label class="check-label" for="c3_4">医療病棟2Fへの受け入れ連絡を完了</label>
-      </li>
-      <li>
-        <input type="checkbox" id="c3_5" onchange="updateProgress()">
-        <label class="check-label" for="c3_5">入院診療計画書・同意書コピー・患者情報をクリアファイルに入れて病棟Nsに渡した</label>
-      </li>
-      <li>
-        <input type="checkbox" id="c3_6" onchange="updateProgress()">
-        <label class="check-label" for="c3_6">PSG機器装着（16:00〜）を検査技師・フクダライフテック技師が実施</label>
+        <label class="check-label" for="c3_4">PSG機器装着（16:00〜）を検査技師・フクダライフテック技師が実施</label>
       </li>
     </ul>
   </section>
