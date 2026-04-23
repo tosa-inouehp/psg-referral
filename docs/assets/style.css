@@ -27,7 +27,7 @@ body {
   font-size: 15px;
   line-height: 1.75;
   color: var(--gray-dk);
-  background: #f4f8fd;
+  background: #f0f5f2;
 }
 
 a { color: var(--primary); text-decoration: none; }

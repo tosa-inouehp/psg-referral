@@ -31,9 +31,9 @@
     <rect x="40" y="0" width="8" height="86" rx="4" fill="#1a5276"/>
     <circle cx="80" cy="43" r="18" fill="#1a5276"/>
     <text x="80" y="48" text-anchor="middle" font-size="15" font-weight="bold" fill="white">②</text>
-    <text x="108" y="28" font-size="13" font-weight="bold" fill="#1a5276">井上病院へ予約連絡（FAX/電話）</text>
+    <text x="108" y="28" font-size="13" font-weight="bold" fill="#1a5276">井上病院 外来へ予約連絡</text>
     <rect x="108" y="36" width="300" height="22" rx="4" fill="#fadbd8"/>
-    <text x="258" y="51" text-anchor="middle" font-size="12" font-weight="bold" fill="#c0392b">⚠ 検査希望日の1週間前までにご連絡ください</text>
+    <text x="258" y="51" text-anchor="middle" font-size="12" font-weight="bold" fill="#c0392b">⚠ 検査希望日の2週間前までにご連絡ください</text>
     <text x="108" y="76" font-size="12" fill="#5d6d7e">予約依頼票（患者氏名・生年月日・AHI値等）をFAX送付</text>
   </g>
 
@@ -93,10 +93,9 @@
     <rect x="40" y="0" width="8" height="86" rx="4" fill="#7d3c98"/>
     <circle cx="80" cy="43" r="18" fill="#7d3c98"/>
     <text x="80" y="48" text-anchor="middle" font-size="15" font-weight="bold" fill="white">⑥</text>
-    <text x="108" y="26" font-size="13" font-weight="bold" fill="#7d3c98">PSG機器装着（16:00〜 約40〜60分）</text>
-    <text x="108" y="44" font-size="12" fill="#5d6d7e">検査技師・フクダライフテック技師が</text>
-    <text x="108" y="60" font-size="12" fill="#5d6d7e">脳波・呼吸・心電図等のセンサーを装着</text>
-    <text x="108" y="76" font-size="12" fill="#5d6d7e">装着後は病室内トイレまで移動可能です</text>
+    <text x="108" y="26" font-size="13" font-weight="bold" fill="#7d3c98">PSG機器装着（16:00〜 60分程度）</text>
+    <text x="108" y="48" font-size="12" fill="#5d6d7e">検査技師が脳波・呼吸・心電図等のセンサーを装着</text>
+    <text x="108" y="68" font-size="12" fill="#5d6d7e">装着後は病室内トイレまで移動可能です</text>
   </g>
 
   <!-- Arrow 6（+30） -->
